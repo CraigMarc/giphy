@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="styles.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <h1></h1>
+    <h3></h3>
+    <button id="newImage" type="button">New Image</button>
+    
+    <img src="#">
+
+    
+    <form action="" id="form">
+        
+          <div class="input">
+           
+            
+            <input placeholder=" Search Courses" name="search" type="text" id="search" required />
+          </div>
+
+        
+          </div>
+       
+
+        <div class="submit">
+          <button class="submitButton" type="submit">Search</button>
+        </div>
+      </form>
+
+
+
+
+
+
+    <script>
+
+         const img = document.querySelector('img');
+         const button = document.querySelector('#newImage');
+         const h3 = document.querySelector('h3');
+         const h1 = document.querySelector('h1');
+        
+
+         button.addEventListener("click", (e) => {
+        getImage()
+         })
+
+        
+    let searchArray = ['Cats']
+         changeTitle()
+         getImage()
+
+
+function changeTitle(title) {
+  h1.textContent = searchArray[0];
+}
+
+function getImage (searchData) {
+    
+   try{
+  fetch('https://api.giphy.com/v1/gifs/translate?api_key=v2YDF1ePtZC4F8HUx7ymmyQd8fP8aSO9&s='+searchArray[0], {mode: 'cors'})
+    
+  
+  .then(function(response) {
+
+        console.log(response)
+
+      return response.json();
+
+
+    })
+
+    
+
+    .then(function(response) {
+
+        
+        if (response.data  == []) {
+            h3.textContent = "No Images Found";
+        }
+
+
+        console.log(response.data.images.original.url);
+        img.src = response.data.images.original.url;
+        
+    });
+   }
+   catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+  }
+
+    
+    
+}
+
+
+  document.getElementById("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    
+   
+    searchArray[0] = data.search
+  
+    getImage(searchArray[0])
+    changeTitle()
+    
+  });
+
+
+    </script>
+
+
+
+</body>
+</html>
