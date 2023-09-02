@@ -79,10 +79,12 @@ console.log(src)
      }
      
      if (catData.data.images.original.url != src) {
+        console.log(catData.data.images.original.url != src)
    img.src = catData.data.images.original.url;
      }
      else getImage()
     }
+    
     catch (error) {
         console.error("There has been a problem with your fetch operation:", error);
         }
