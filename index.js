@@ -6,13 +6,14 @@ const h1 = document.querySelector('h1');
 
 button.addEventListener("click", (e) => {
 getImage()
-console.log(e)
+
 })
 
 
 let searchArray = ['Beach']
 changeTitle()
 getImage()
+
 
 
 function changeTitle() {
@@ -63,25 +64,31 @@ console.error("There has been a problem with your fetch operation:", error);
 //function with async await
 
 async function getImage() {
+    let src = document.getElementById("img").src;
+console.log(src)
 
     try{
     const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=v2YDF1ePtZC4F8HUx7ymmyQd8fP8aSO9&s='+searchArray[0], {mode: 'cors'})
 
     const catData = await response.json();
 
+
+
     if (catData  == []) {
         h3.textContent = "No Images Found";
      }
-
-
-    img.src = catData.data.images.original.url;
-     console.log(img.src)
+     
+     if (catData.data.images.original.url != src) {
+   img.src = catData.data.images.original.url;
+     }
+     else getImage()
     }
     catch (error) {
         console.error("There has been a problem with your fetch operation:", error);
         }
   }
 
+ 
 //function with .catch no try block
 /*
 async function getImage() {
