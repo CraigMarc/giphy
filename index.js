@@ -10,7 +10,7 @@ console.log(e)
 })
 
 
-let searchArray = ['Cats']
+let searchArray = ['Beach']
 changeTitle()
 getImage()
 
@@ -18,6 +18,8 @@ getImage()
 function changeTitle() {
 h1.textContent = searchArray[0];
 }
+
+//function with promise
 /*
 function getImage () {
 
@@ -58,6 +60,8 @@ console.error("There has been a problem with your fetch operation:", error);
 }
 */
 
+//function with async await
+
 async function getImage() {
 
     try{
@@ -78,7 +82,29 @@ async function getImage() {
         }
   }
 
+//function with .catch no try block
+/*
+async function getImage() {
 
+    
+    const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=v2YDF1ePtZC4F8HUx7ymmyQd8fP8aSO9&s='+searchArray[0], {mode: 'cors'})
+
+    const catData = await response.json();
+
+    if (catData  == []) {
+        h3.textContent = "No Images Found";
+     }
+
+
+    img.src = catData.data.images.original.url;
+     console.log(img.src)
+    
+   
+  
+        
+  }
+*/
+  //getImage().catch (alert) 
 
 document.getElementById("form").addEventListener("submit", (e) => {
 e.preventDefault();
